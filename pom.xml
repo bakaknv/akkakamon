@@ -38,29 +38,78 @@
         <dependency>
             <groupId>io.kamon</groupId>
             <artifactId>kamon-core_2.11</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.kamon/kamon-jmx_2.11 -->
         <dependency>
             <groupId>io.kamon</groupId>
             <artifactId>kamon-jmx_2.11</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.kamon/kamon-akka_2.11 -->
         <dependency>
             <groupId>io.kamon</groupId>
             <artifactId>kamon-akka_2.11</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.3</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.kamon/kamon-log-reporter_2.11 -->
+        <dependency>
+            <groupId>io.kamon</groupId>
+            <artifactId>kamon-log-reporter_2.11</artifactId>
+            <version>0.6.3</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.2</version>
+            <version>1.8.10</version>
         </dependency>
 
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>reference.conf</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>naklugin.perduction.App</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

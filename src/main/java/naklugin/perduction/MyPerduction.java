@@ -22,6 +22,7 @@ class MyPerduction extends UntypedActor
     public void onReceive(Object message) {
         if (message.equals("test")) {
             log.info("Received test");
+            log.warning("Hello world : i'm warning");
             try
             {
                 Thread.sleep(1000);
